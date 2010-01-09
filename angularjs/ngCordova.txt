@@ -1,0 +1,6 @@
+ngCordova是什么？
+我们再使用ionic的时候就嫌弃ionic做不了与手机硬件紧密结合的app，如拍照，文件上传，地理位置等。现在，我们可以借用ngCordova插件进行实现了。
+ngCordova是在Cordova Api基础上封装的一系列开源的AngularJs服务和扩展，让开发者可以方便的在HybridApp开发中调用设备能力，即可以在AngularJs代码中访问设备能力Api。
+
+
+帮助地址：http://www.ionic-china.com/doc/ngCordova/Network.html

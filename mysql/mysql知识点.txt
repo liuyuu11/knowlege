@@ -1,0 +1,28 @@
+创建数据库：
+create database test character set utf8;
+删除数据库：
+drop database test;
+
+建表：
+create table userinf
+(
+		id int unsigned not null auto_increment primary key,
+		name char(8) not null,
+		age tinyint unsigned not null,
+);
+
+//auto_increment自增，not null 不为空，primary key 主键
+删表：
+drop table userinf;
+
+插入数据：
+insert into userinf (name,age)  value ("snoobcn",50)
+
+查询数据：
+select * from userinf;
+
+删除数据：
+delete from userinf where id=2;
+
+更改数据：
+update userinf set name="snoobly" where id=3;
