@@ -1,0 +1,118 @@
+1、git安装
+    下载地址：https://git-for-windows.github.io
+
+2、配置个人信息（名字与邮箱）
+      使用Git的第一件事就是设置你的名字和email,这些就是你在提交commit时的签名
+    git config --global user.name "Your Name"
+    git config --global user.email "email@example.com"
+     **查看是否配置成功，用命名git config -l
+
+3、创建本地仓库
+    git init：把当前目录变成一个git仓库
+     以上命令会在当前目录下创建了一个.git 隐藏目录，它就是所谓的Git 仓库。生成仓库后的目录就不是普通的文档目录了，我们将其称为工作区，所以工作区中都包含一个git仓库，而一个git仓库中又包含一个暂存区和一个版本库
+
+4、工作区与版本库概念
+    Git有三大区 （ 工作区、暂存区、版本库 ）以及 几个状态 （ untracked、unstaged、uncommited ）
+    工作区（Working Directory）：电脑中的目录
+    仓库：工作区有一个隐藏目录.git，这个不算工作区，而是Git仓库。
+        暂存区（stage area/index）：
+        版本库 （Repository） ：
+
+5、添加文件到版本库的步骤
+    1）创建文件
+          往工作区中添加文件
+    2）添加到暂存区：git add <file>
+          把修改存放到一个临时的存储区域，Git 称之为暂存区（索引）。
+    3）提交到仓库：git commit -m "备注"
+          使用git commit 命令可将暂存区的内容提交至版本库中，这个过程称为提交，每一次提交都意味着版本在进行一次更新
+
+6、其他命令
+    1）查看仓库变更状态：git status
+    2）对比文件：git diff <file>
+
+7、版本回退
+    1）显示从最近到最远的提交日志：git log
+        1>--pretty=oneline（显示简要信息id+备注）
+        2>--graph（图形显示版本走向）
+        3>--abbrev-commit（显示简写的id）
+        4>一大串类似3628164...882e1e0的是commit id（版本号）
+    2）当前版本：HEAD
+        上一个版本：HEAD^
+        上上个版本：HEAD^^
+        ...            依此类推
+        前100个版本：HEAD~100
+    3）git reset (--hard、--mixed、--soft)
+        1>回退到上一个版本
+            git reset --hard HEAD^
+        2>回退到指定版本：
+            git reset --hard [commit id] 版本号没必要写全，前几位就可以了，Git会自动去找。
+         3>回退指定文件
+              git reset --hard [commit id] <file>
+    4）查看命令历史：git reflog
+
+8、撤销修改
+    git checkout -- <file>：放弃工作区的修改
+    git rm --cache <file>：撤销暂存区的修改
+    git reset HEAD <file>：撤销暂存区的修改
+
+9、远程仓库
+    1）创建SSH Key：ssh-keygen -t rsa -C 'xxx@xx.com'
+        以上命令会在当前window用户的目录里创建.ssh目录，里面有id_rsa（私钥）和id_rsa.pub（公钥）两个文件
+    2）把私钥或公钥添加到远程仓库
+    3）建立本地仓库与远程仓库的连接（先有本地库，后有远程库的时候，如何关联远程库）
+        git remote add origin 远程仓库地址
+    4）从远程库克隆（先有远程库，后有本地库的时候，如何关联远程库）
+        git clone 远程仓库地址
+     **当你从远程仓库克隆时，实际上Git自动把本地的master分支和远程的master分支对应起来了，并且，远程仓库的默认名称是origin
+
+10、推送到远程仓库
+     git push
+     格式：git push <远程主机名> <本地分支名>:<远程分支名>
+
+11、拉取与合并
+     1）git pull
+          格式：git pull <远程主机名> <远程分支名>:<本地分支名>
+     2）git fetch
+     3）git merge
+
+     **<来源地>:<目的地>
+
+
+概念：master、HEAD、提交
+
+1）创建分支：git branch <name>
+2）切换分支：git checkout <name>
+**以上两步合并为：git checkout -b <name>
+
+3）查看分支：git branch
+     列出所有分支，当前分支前面会标一个*号
+4）合并分支：git merge <name>
+     git merge dev==>把dev分W支合并到当前分支
+     Fast-forward：快速合并
+     禁用快速合并： --no-ff     （保持分支信息）
+     合并要创建一个新的commit，所以加上-m参数，把commit描述写进去
+5）删除分支：git branch -d <name>
+     强行删除，需要使用命令git branch -D feature-vulcan
+
+**因为创建、合并和删除分支非常快，所以Git鼓励你使用分支完成某个任务，合并后再删掉分支，这和直接在master分支上工作效果是一样的，但过程更安全。
+
+
+分支策略
+
+在实际开发中，我们应该按照几个基本原则进行分支管理：
+首先，master分支应该是非常稳定的，也就是仅用来发布新版本，平时不能在上面干活；
+那在哪干活呢？干活都在dev分支上，也就是说，dev分支是不稳定的，到某个时候，比如1.0版本发布时，再把dev分支合并到master上，在master分支发布1.0版本；
+你和你的小伙伴们每个人都在dev分支上干活，每个人都有自己的分支，时不时地往dev分支上合并就可以了。
+所以，团队合作的分支看起来就像这样：
+
+
+
+工作区操作：
+     1）git stash     把当前工作现场“储藏”起来，等以后恢复现场后继续工作
+     2）git stash list     查看储藏列表
+     3）git stash apply     恢复后，stash内容并不删除
+     4）git stash drop     用来删除储藏列表
+     **git stash pop包含以上两个命令
+     5）git stash pop     恢复的同时把stash内容也删了
+     **你可以多次stash，恢复的时候，先用git stash list查看，然后恢复指定的stash，用命令：
+     git stash apply stash@{0}

@@ -1,0 +1,104 @@
+﻿npm：node package management(node包管理)
+	1)安装包：
+		npm install <包名>
+
+		参数
+		-g(global)：全局安装
+		--save
+		--save-dev
+		这些需要安装的包都放在国外的服务器，由于某些原因（你懂的），国内反问经常回传缓慢甚至安装失败的情况，这时需要安装cnpm
+	2) 选装cnpm
+		npm install -g cnpm
+		装完cnpm后，用cnpm命令所安装的包就是从淘宝的服务器里下载，所以速度会相对快些
+
+	3）自动化构建工具gulp
+		为什么要用自动化构建工具？ 主要是用来自动完成一系列重复的操作，如：
+        1）编译：
+			less-> css
+			sass->css
+			coffeescript->js
+		2）合并: css, js
+		3）压缩 ：css, js, html
+		4）优化：图片优化
+		......
+		官网：http://gulpjs.com/
+		中文网：http://www.gulpjs.com.cn/
+
+		安装gulp
+			1. 全局安装 gulp：
+				npm install --global gulp
+				说明：全局安装gulp目的是为了通过它执行gulp任务
+
+			2. 本地安装gulp：
+				作为项目的开发依赖（devDependencies）安装：
+				npm install --save-dev gulp
+				PS:
+				1）本地安装gulp是为了调用gulp插件的功能，
+				2）--save-dev 保存配置信息至 package.json 的 devDependencies 节点
+				3）这步操作前先新建package.json文件（npm init）
+				4）这步完成后就可以安装各种gulp插件了
+			3、创建gulpfile.js到项目根目录
+				在项目根目录下创建一个名为 gulpfile.js 的文件（重要）
+				说明：gulpfile.js是gulp项目的配置文件，是位于项目根目录的普通js文件，内部主要创建一些自动化任务，内容如下：
+				
+				var gulp = require('gulp');
+
+				gulp.task('default', function() {
+				  // 将你的默认的任务代码放在这
+				});
+
+			4. 运行 gulp：
+				格式：gulp <任务名称>
+
+				如果不写任务名称，则自动运行default任务（如果有）
+
+
+	4）安装gulp-sass
+		用来编译sass源文件，编译后文件变成css文件
+
+
+	5）浏览器同步插件browser-sync
+		官网：https://browsersync.io/
+
+	6）gulp API
+		1）创建任务，并通过gulp命名来执行
+		     gulp.task('buildSass')
+		     执行：
+		     	gulp buildSass
+
+
+		2）匹配要处理的文件
+		     gulp.src(globs[, options])
+			     globs匹配语法：https://github.com/isaacs/node-glob（底部PS）
+			     options 有3个属性buffer、read、base
+
+		3）输出文件
+		     gulp.dest(path[, options])
+		     把文件流中的内容中输出到指定目录
+
+		4） 监听文件修改，并执行相应任务
+		     gulp.watch(glob [, opts], tasks)
+		     gulp.watch(glob [, opts, cb])  
+
+		5）执行指定任务
+		     gulp.run()
+		     表示要执行的任务。可能会使用单个参数的形式传递多个任务。
+		     注意：任务是尽可能多的并行执行的，并且可能不会按照指定的顺序运行.
+		gulp.task('end',function(){
+		    gulp.run('task1','task3','task2');
+		});
+
+	7）热门插件
+		html压缩：gulp-htmlmin
+		css压缩：gulp-clean-css
+		js压缩：gulp-uglify
+		图片压缩：gulp-imagemin
+
+		文件合并：gulp-concat
+		文件重命名：gulp-rename
+
+		sass编译：gulp-sass
+
+		浏览器同步插件browser-sync
+	
+
