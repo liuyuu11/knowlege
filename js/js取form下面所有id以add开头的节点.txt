@@ -1,0 +1,13 @@
+js取form下面所有id以add开头的节点
+var all = document.getElementsByTagName('*'), all_ = new Array();
+for(var i = 0; i<all.length; i++){
+    if (/div.+/.test(all[i].getAttribute('add'))) {
+all_[all_.length] = all[i];
+}
+}
+
+var all = document.getElementsByTagName('*'), all_ = new Array();
+for(var i = 0; i<all.length; i++){
+    if (/add.+/.test(all[i].getAttribute('id'))) {
+all_[all_.length] = all[i];
+}
