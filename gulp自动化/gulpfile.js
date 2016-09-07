@@ -1,31 +1,61 @@
-//1.引包
+//npm install -g gulp && npm install gulp
 var gulp = require('gulp');
-var concat = require('gulp-concat');
-var jsmin = require('gulp-uglify');
+//压缩js依赖 npm install gulp-uglify
+var uglify = require('gulp-uglify');
+//重命名包
 var rename = require('gulp-rename');
+//合并JS文件
+var concat = require('gulp-concat');
+//压缩css
+var minifycss = require('gulp-minify-css');
+//压缩html
+var minifyhtml = require('gulp-minify-html');
+//压缩图片
+var minifyimage = require('gulp-imagemin');
 
+//创建第一个任务
+gulp.task('minify', function() {
+		gulp.src('./js/*.js')
+			//执行方法
+			.pipe(uglify())
+			//合并到XX名的.js
+			.pipe(concat('main.js'))
+			//重命名加上.min
+			.pipe(rename({
+				suffix: '.min',
+			}))
+			//导出去
+			.pipe(gulp.dest('./build/js'))
+	})
+	//压缩css
+gulp.task('minifycss', function() {
+	gulp.src('./css/*.css')
+		.pipe(minifycss())
+		.pipe(rename({
+			suffix: '.min',
+		}))
+		.pipe(gulp.dest('./build/css'))
+})
 
-// 2.创建任务
-gulp.task('concatJS',function(){
-	return gulp.src('./src/js/*.js')
+gulp.task('minifyhtml', function() {
+	gulp.src('./html/*.html')
+		.pipe(minifyhtml())
+		.pipe(rename({
+			suffix: '.min',
+		}))
+		.pipe(gulp.dest('./build/html'))
+})
 
-		//把所有匹配到的js文件合并成index.js
-		.pipe(concat('index.js'))
+gulp.task('minifyimage', function() {
+	gulp.src('./img/*.+(jpg|png)')
+		.pipe(minifyimage(
+			optimizationLevel: 7, //类型：Number  默认：3  取值范围：0-7（优化等级）
+			progressive: true, //类型：Boolean 默认：false 无损压缩jpg图片
+			interlaced: true, //类型：Boolean 默认：false 隔行扫描gif进行渲染
+			multipass: true //类型：Boolean 默认：false 多次优化svg直到完全优化
+		))
+		.pipe(gulp.dest('./build/img'))
+})
 
-		
-		// 输出到相应文件夹
-		.pipe(gulp.dest('./dist/js'))
-
-		// 压缩合并后的文件
-		.pipe(jsmin({mangle:false}))
-
-		// 改名
-		.pipe(rename({suffix: "-min"}))
-
-		// 输出到相应文件夹
-		.pipe(gulp.dest('./dist/js'))
-
-});
-
-//3.执行任务
-//在命令行执行gulp <任务名>
+//默认执行
+gulp.task('default', ['minify', 'minifycss', 'minifyhtml', 'minifyimage']);
