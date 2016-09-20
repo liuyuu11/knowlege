@@ -1,0 +1,26 @@
+mongoDB
+1>安装数据，百度下，一堆安装包。
+2>安装完后在随意目录下建个db文件夹，用来存放mongodb的数据，当然我习惯是在安装mongoDB下建。
+3>进到mongoDB/bin目录下使用 mongod --dbpath=C:\mongoDB\db
+4>启动后，别关闭这个命令栏，然后你可以登陆:http://localhost:27017/ ，中学生英文，大家都看得懂，有启动服务就行。
+
+使用：
+insert操作：
+db.test.insert({"name":"snoob"})  //会自动创建test数据库，然后插入数据。要查看所有数据库：show dbs
+find操作：
+db.test.find() //你会看到有相关数据的，其中第一栏"_db":ObjectIdXX;这个字段是数据库默认给我们加的GUID，目的就是保证数据的唯一性。也不要怕写错。错误提示很强大的。
+当然，你也可以利用db.test.find({"name":"snoob"})，这种方式也是行的。
+update操作：
+db.test.update({"name":"snoob"},{"name":"snoobcn"}) //2个参数，update方法的第一个参数为“查找的条件”，第二个参数为“更新的值”。
+remove操作
+db.test.remove() //不带参数将删除所有数据，炒鸡危险的操作，在mongodb中是一个不可撤回的操作，三思而后行
+
+文档是采用“K-V”格式存储的，如果大家对JSON比较熟悉的话，我相信学mongodb是手到擒来，我们知道JSON里面Value
+可能是“字符串”，可能是“数组”，又有可能是内嵌的一个JSON对象，相同的方式也适合于BSON（Binary JSON）
+我们也可以这样写：
+var userInf={"name":"snoob","age":20,"fav":["football","basketball"]}
+db.test.insert(userInf)
+//这样就会看到上面那条数据也插入了。
+userInf.name="snoobcn"
+db.test.insert(userInf)
+//这样就会有2条数据，并且就只有名字不一样，不信你find()看看。批量写入的话，只要用个for循环或者while循环，反正你只要控制好就行。
