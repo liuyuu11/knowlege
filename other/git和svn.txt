@@ -1,0 +1,24 @@
+参考文章地址：http://blog.jobbole.com/31444/
+1.GIT是分布式的，SVN不是
+2.GIT把内容按元数据方式存储，而SVN是按文件
+3.GIT分支和SVN的分支不同
+4.GIT没有一个全局的版本号，而SVN有
+5.GIT的内容完整性要优于SVN
+
+
+Git拉项目的是
+git clone ssh地址
+
+SVN拉项目是
+客户端SVN checkout
+
+工作中常用的git指令：
+git clone ssh地址 
+git add .   //加载全部
+git commit -m "xxx"  //提交
+git log  //查看日志
+git push origin master:master //将本地的master提交到远程仓库
+git branch //查看分支情况
+git branch xxx //创建分支
+git checkout name //切换分支
+git pull  //拉取

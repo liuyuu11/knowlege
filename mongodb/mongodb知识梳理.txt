@@ -24,3 +24,42 @@ db.test.insert(userInf)
 userInf.name="snoobcn"
 db.test.insert(userInf)
 //这样就会有2条数据，并且就只有名字不一样，不信你find()看看。批量写入的话，只要用个for循环或者while循环，反正你只要控制好就行。
+
+查询用到的:
+ ①： >, >=, <, <=, !=, =。  -->"$gt", "$gte", "$lt", "$lte", "$ne", "没有特殊关键字"
+ ②：And，OR，In，NotIn  -->"无关键字“, "$or", "$in"，"$nin" 
+//样例，如数据库中有个年龄30，年龄20，年龄40，我要查小于35的
+db.test.find({"age":{$lt:35}})
+
+正则查询：简直无耻
+db.test.find({"name":/^s/})
+
+查询很复杂，用$where
+db.test.find({$where:function(){return this.name=='snoob'}})
+
+//假设数据{"name":"snoob","age":30}
+db.test.update({"name":"snoob"},{"age":60})==>数据就变成了{"age":60}
+db.test.update({"name":"snoob"},{$inc{"age":60}})==>数据就变成了{"name":"snoob","age":90}  //inc = increase自增
+db.test.update({"name":"snoob"},{$set{"age":60}})==>数据就变成了{"name":"snoob","age":60}
+
+upsert操作 = update+insert   //  如果我没有查到，我就在数据库里面新增一条
+
+count操作:
+db.test.count({"age":40})  //返回age=40的条数
+distinct操作：//假设数据有{"age":40} {"age":30} {"age":20} {"age":40}
+db.test.distinct("age")  //去重返回值 [20,30,40]
+
+group、mapReduce操作，蛮复杂，说不清楚啊附上地址：http://www.cnblogs.com/huangxincheng/archive/2012/02/21/2361205.html
+
+设置游标
+var list=db.test.find(); 
+list.forEach(function(x){print(x.age)});
+
+sort排序1增序 -1降序：
+db.test.find().sort({"age":1})
+limit()返回最大数量
+db.test.find().limit(2) //返回2条结果
+skip()跳过
+db.test.find().skip(2) //跳过2条结果
+组合大技：db.test.find().sort({"age":1}).skip(2).limit(3) //按年龄正序的结果跳过2条后显示3条
+
