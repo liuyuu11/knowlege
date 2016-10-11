@@ -1,28 +1,28 @@
-´´½¨Êı¾İ¿â£º
+åˆ›å»ºæ•°æ®åº“ï¼š
 create database test character set utf8;
-É¾³ıÊı¾İ¿â£º
+åˆ é™¤æ•°æ®åº“ï¼š
 drop database test;
 
-½¨±í£º
+å»ºè¡¨ï¼š
 create table userinf
 (
 		id int unsigned not null auto_increment primary key,
 		name char(8) not null,
 		age tinyint unsigned not null,
 );
-
-//auto_increment×ÔÔö£¬not null ²»Îª¿Õ£¬primary key Ö÷¼ü
-É¾±í£º
+//
+//auto_incrementè‡ªå¢ï¼Œnot null ä¸ä¸ºç©ºï¼Œprimary key ä¸»é”®
+åˆ è¡¨ï¼š
 drop table userinf;
 
-²åÈëÊı¾İ£º
+æ’å…¥æ•°æ®ï¼š
 insert into userinf (name,age)  value ("snoobcn",50)
 
-²éÑ¯Êı¾İ£º
+æŸ¥è¯¢æ•°æ®ï¼š
 select * from userinf;
 
-É¾³ıÊı¾İ£º
+åˆ é™¤æ•°æ®ï¼š
 delete from userinf where id=2;
 
-¸ü¸ÄÊı¾İ£º
+æ›´æ”¹æ•°æ®ï¼š
 update userinf set name="snoobly" where id=3;
