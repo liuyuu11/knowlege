@@ -1,5 +1,51 @@
-ԭ��Subl3��װPackage Control���鷳�����ڼ򵥵ķ�������
+原来Subl3安装Package Control很麻烦，现在简单的方法来了
 
-һ���򵥵İ�װ����
-ʹ��Ctrl+`��ݼ�����ͨ��View->Show Console�˵��������У�ճ�����´��룺
+一、简单的安装方法
+使用Ctrl+`快捷键或者通过View->Show Console菜单打开命令行，粘贴如下代码：
 import urllib.request,os; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), 'wb').write(urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ','%20')).read())  
+
+必备插件：
+Emmet
+Emmet （前身是 Zen Coding）是一个前端开发不可缺少的插件，它让编写 HTML和CSS代码变得简单，节省大量时间。Emmet可使开发者用缩写形式书写代码，再用“扩展”功能自动将代码扩展至完整样式
+
+AllAutocomplete
+Sublime Text 默认的 Autocomplete 功能只考虑当前的文件，而 AllAutocomplete 插件会搜索所有打开的文件来寻找匹配的提示词。
+
+ SublimeREPL
+这可能是对程序员最有用的插件。SublimeREPL 允许你在 Sublime Texxt 中运行各种语言（NodeJS ， Python，Ruby， Scala 和 Haskell 等等）
+
+SublimeCodeIntel
+SublimeCodeIntel 作为一个代码提示和补全插件，支持 JavaScript、Mason、XBL、XUL、RHTML、SCSS、Python、HTML、Ruby、Python3、XML、Sass、XSLT、Django、HTML5、Perl、CSS、Twig、Less、Smarty、Node.js、Tcl、TemplateToolkit 和 PHP 等所有语言
+
+SublimeLinter
+SublimeLinter是少数几个能在sublime text 3工作的代码检查插件，SublimeLinter支持JavaScript、CSS、HTML、Java、PHP、Python、Ruby等十多种开发语言，但前提是需要配置相应语言的环境，要检查JavaScript代码需要安装node.js，检查PHP代码需要安装PHP并配置环境等。SublimeLinter可以及时提示编写代码中存在的不规范和错误的写法，并培养我们良好的编码习惯和风格。
+
+Alignment
+Aligment插件让开发者自动对齐代码，包括PHP、CSS、JavaScript语言。使得代码看起来更整齐美观，更具可读性。
+
+ DocBlockr
+如果你遵循的编码的风格很严格，这款插件能够使你的任务更容易。DocBlokr 帮助你创造你的代码注释，通过解析功能，参数，变量，并且自动添加基本项目。
+
+JSFormat
+功能：Javascript的代码格式化插件
+简介：很多网站的JS代码都进行了压缩，一行式的甚至混淆压缩，这让我们看起来很吃力。而这个插件能帮我们把原始代码进行格式的整理，包括换行和缩进等等，是代码一目了然，更快读懂~
+使用：在已压缩的JS文件中，右键选择jsFormat或者使用默认快捷键（Ctrl+Alt+F）
+
+sublime-autoprefixer
+功能：CSS添加私有前缀
+简介：CSS还未标准化，所以要给各大浏览器一个前缀以解决兼容问题
+使用：Ctrl+Shift+P，选择autoprefixer即可。需要安装node.js
+
+AutoFileName
+功能：快捷输入文件名
+简介：自动完成文件名的输入，如图片选取
+使用：输入”/”即可看到相对于本项目文件夹的其他文件
+
+BracketHighlighter
+代码检查高亮
+
+ColorPicker
+通常，如果我们需要一个调色盘的时候，我们习惯使用Photoshop或是Gimp。但是一个完整的选色工具可以直接在你的编辑器中使用- Ctrl/Cmd + Shift + C。还有两个插件 GutterColor 和 ColorHighlightergutter可以在gutter中显示很棒的色彩高亮，简化了色彩代码的定位。
+
+Colorcoder
+高亮所有变量，因此可以极大的简化代码定位。尤其是对那些有阅读障碍的程序员非常有帮助。
