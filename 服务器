@@ -1,1 +1,5 @@
 linux服务器(centos云服务器)安装nodejs:
+第一步，登陆云主机，我是通过putty登陆，怎么登陆我就不介绍了。
+第二步，下个稳定版本的nodejs，我是在http://nodejs.cn/download/找了个v6.2.0的，地址：https://nodejs.org/dist/v6.2.0/node-v6.2.0-sunos-x64.tar.gz
+第三步，wget https://nodejs.org/dist/v6.2.0/node-v6.2.0-sunos-x64.tar.gz
+第四步，tar zxvf node-v6.2.0-sunos-x64.tar.gz
