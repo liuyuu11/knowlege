@@ -1,0 +1,13 @@
+调试常用的小包:supervisor   -g  
+nodejs调试工具node-inspector    -g    使用命令：node --debug-brk=5858 debug.js
+express已经把命令行工具分离出来，要使用express4需要npm install -g express-generator然后npm install express后 express --help测试
+
+1.如何在项目中安装ejs模板引擎
+在NodeJS指南中利用利用以下命令建立网站的基本结构：
+express -t ejs microblog
+运行这个命令后继续运行
+cd microblog && npm install（安装项目的依赖属性），
+发现安装的模板引擎是jade，而不是ejs。原因是现在的版本已经没有-t这个命令了，改为
+express -e  microblog
+运行完这个命令，继续运行cd microblog && npm install，ejs模板引擎就安装好了
+但是express3以上的版本把layout默认给取消了，所以现在在views文件夹下并没有生成layout.ejs。
